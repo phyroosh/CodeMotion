@@ -95,6 +95,8 @@ CodeMotion/
 │   ├── easings.py            # Custom tactile rate functions & spring curves
 │   ├── components.py         # BentoCard, MetricCounter, KineticText, DataWire, RadialMeter
 │   ├── script_engine.py      # 20-Year Veteran Script Engine & 8-Gate Validator
+│   ├── podcast_extractor.py  # Lightweight podcast content & transcript extraction (zero video download)
+│   ├── topic_queue.py        # Persistent cross-session topic queue manager (data/topics_queue.json)
 │   ├── voice.py              # Edge TTS integration (en-US-AvaMultilingualNeural) & FFmpeg muxer
 │   ├── frontier_t.py         # Thumbnail intelligence director & optical multi-scale validator
 │   ├── metadata.py           # YouTube Shorts autonomous metadata synthesizer
@@ -103,6 +105,7 @@ CodeMotion/
 ├── examples/
 │   ├── showcase.py           # 16:9 Landscape master showcase
 │   ├── short_explainer.py    # 9:16 Vertical explainer with voiceover & RightClips export
+│   ├── test_podcast_pipeline.py # Podcast extraction & topic queue state verification
 │   ├── test_frontier_t.py    # Frontier T optical verification suite
 │   └── test_script_engine.py # Veteran script engine & Edge TTS verification
 └── pyproject.toml            # Project configuration & uv dependencies
@@ -127,6 +130,9 @@ uv pip install -e .
 
 ### 2. Run Test & Verification Suites
 ```bash
+# Verify Podcast Extraction (zero media download) & Topic Queue State Machine
+uv run python examples/test_podcast_pipeline.py
+
 # Verify the 20-Year Veteran Script Engine & Edge TTS audio synthesis
 uv run python examples/test_script_engine.py
 
@@ -134,10 +140,17 @@ uv run python examples/test_script_engine.py
 uv run python examples/test_frontier_t.py
 ```
 
-### 3. Render Videos
+### 3. Extract Topics from a Podcast Link
+```bash
+# Extracts chapters, subtitles, and stores candidate topics in data/topics_queue.json
+uv run python -m motion_framework.podcast_extractor --url <YOUTUBE_PODCAST_URL>
+```
+
+### 4. Render Videos
 ```bash
 # Full 9:16 Short Explainer (Script + Voiceover + Render + Mux + RightClips Export)
 uv run python examples/short_explainer.py
+
 
 # Landscape 16:9 Showcase Preview (720p 30fps)
 uv run manim -pqm examples/showcase.py ShowcaseScene

@@ -45,6 +45,17 @@ from .script_engine import (
     VeteranScript,
     VeteranScriptDirector,
 )
+from .topic_queue import (
+    TopicItem,
+    TopicQueueManager,
+)
+from .podcast_extractor import (
+    PodcastContent,
+    PodcastChapter,
+    extract_podcast_content,
+    identify_reel_topics,
+    process_podcast_link,
+)
 
 __all__ = [
     "OnyxCyber",
@@ -84,5 +95,13 @@ __all__ = [
     "ScriptValidator",
     "VeteranScript",
     "VeteranScriptDirector",
+    "TopicItem",
+    "TopicQueueManager",
+    "PodcastContent",
+    "PodcastChapter",
+    "extract_podcast_content",
+    "identify_reel_topics",
+    "process_podcast_link",
 ]
+
 
